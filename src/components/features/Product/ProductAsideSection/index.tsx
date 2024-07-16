@@ -1,12 +1,14 @@
 import { Button, Icon, Input } from '@chakra-ui/react';
+
 import { Aside } from '@/components/common/layouts/Split';
+
 import {
   AsideContainer,
-  OptionContainer,
-  OptionBox,
-  Modals,
-  ProductCost,
   GiftButton,
+  Modals,
+  OptionBox,
+  OptionContainer,
+  ProductCost,
 } from './component';
 
 export const ProductAsideSection = () => {

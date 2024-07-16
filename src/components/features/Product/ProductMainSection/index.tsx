@@ -1,7 +1,8 @@
 import { Divider } from '@chakra-ui/react';
 
 import { Main } from '@/components/common/layouts/Split';
-import { Contents, ContentHeader, ContentBody } from './component';
+
+import { ContentBody, ContentHeader, Contents } from './component';
 
 export const ProductMainSection = () => {
   const product = {

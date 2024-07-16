@@ -1,5 +1,6 @@
-import { breakpoints } from '@/styles/variants';
 import styled from '@emotion/styled';
+
+import { breakpoints } from '@/styles/variants';
 
 export const Contents = styled.article`
   width: 100%;
