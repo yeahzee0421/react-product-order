@@ -2,6 +2,7 @@ import { Divider } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 import { breakpoints } from '@/styles/variants';
+import { Main } from '@/components/common/layouts/Split';
 
 export const ProductMainSection = () => {
   const product = {
@@ -33,11 +34,6 @@ export const ProductMainSection = () => {
     </Main>
   );
 };
-
-const Main = styled.main`
-  width: 100%;
-  max-width: 900px;
-`;
 
 const Contents = styled.article`
   width: 100%;

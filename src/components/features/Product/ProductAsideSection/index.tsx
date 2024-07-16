@@ -1,7 +1,7 @@
 import { Button, Icon, Input } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-import { breakpoints } from '@/styles/variants';
+import { Aside } from '@/components/common/layouts/Split';
 
 export const ProductAsideSection = () => {
   const product = {
@@ -68,18 +68,6 @@ export const ProductAsideSection = () => {
     </Aside>
   );
 };
-
-const Aside = styled.aside`
-  display: none;
-  position: sticky;
-  top: 54px;
-  width: 100%;
-  max-width: 360px;
-  height: calc(-54px + 100vh);
-  @media screen and (min-width: ${breakpoints.sm}) {
-    display: block;
-  }
-`;
 
 const AsideContainer = styled.div`
   width: 100%;
