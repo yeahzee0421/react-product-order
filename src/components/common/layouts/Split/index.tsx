@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+
 import { breakpoints } from '@/styles/variants';
 
 export const Main = styled.main`

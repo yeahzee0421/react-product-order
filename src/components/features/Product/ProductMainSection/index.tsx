@@ -1,8 +1,8 @@
 import { Divider } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
-import { breakpoints } from '@/styles/variants';
 import { Main } from '@/components/common/layouts/Split';
+import { breakpoints } from '@/styles/variants';
 
 export const ProductMainSection = () => {
   const product = {
