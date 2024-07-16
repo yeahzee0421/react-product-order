@@ -1,8 +1,7 @@
 import { Divider } from '@chakra-ui/react';
-import styled from '@emotion/styled';
 
 import { Main } from '@/components/common/layouts/Split';
-import { breakpoints } from '@/styles/variants';
+import { Contents, ContentHeader, ContentBody } from './component';
 
 export const ProductMainSection = () => {
   const product = {
@@ -23,10 +22,10 @@ export const ProductMainSection = () => {
             style={{ width: '100%', maxWidth: '450px' }}
           />
           <ContentBody>
-            <h2>{product.title}</h2>
-            <h3>{product.price}</h3>
+            <h2 className="product-title">{product.title}</h2>
+            <h2 className="product-price">{product.price}</h2>
             <Divider orientation="horizontal" />
-            <p>{product.description}</p>
+            <p className="product-description">{product.description}</p>
             <Divider orientation="horizontal" />
           </ContentBody>
         </ContentHeader>
@@ -34,47 +33,3 @@ export const ProductMainSection = () => {
     </Main>
   );
 };
-
-const Contents = styled.article`
-  width: 100%;
-  padding: 16px 16px 60px;
-  @media screen and (min-width: ${breakpoints.sm}) {
-    padding: 32px 32px 80px;
-  }
-`;
-
-const ContentHeader = styled.header`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  @media screen and (min-width: ${breakpoints.sm}) {
-    flex-direction: row;
-  }
-`;
-
-const ContentBody = styled.div`
-  width: 100%;
-  color: rgb(17, 17, 17);
-  @media screen and (min-width: ${breakpoints.sm}) {
-    padding-left: 24px;
-  }
-  h2 {
-    padding-top: 24px;
-    font-size 24px;
-    line-height: 33px;
-    font-weight: 400;
-  }
-  h3 {
-    width: 100%;
-    min-height: 120px;
-    padding-top: 16px;
-    font-size: 30px;
-    line-height: 52px;
-    color: rgb(34, 34, 34);
-  }
-  p {
-    padding: 24px 12px;
-    font-size: 14px;
-    font-weight: 700; 
-  }
-`;
