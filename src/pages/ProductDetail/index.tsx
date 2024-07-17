@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { useProductDetails } from '@/api/hooks/useGetProductDetails';
 import { Container } from '@/components/common/layouts/Container';
@@ -7,18 +7,25 @@ import RetryErrorBoundary from '@/components/common/RetryErrorBoundary';
 import { Spinner } from '@/components/common/Spinner';
 import { ProductAsideSection } from '@/components/features/Product/ProductAsideSection';
 import { ProductMainSection } from '@/components/features/Product/ProductMainSection';
+import { RouterPath } from '@/routes/path';
 
 export const ProductDetailPage = () => {
   const { productId = '' } = useParams<{ productId: string }>();
-  const { data, isLoading, isError } = useProductDetails(productId);
+  const { data, isLoading } = useProductDetails(productId);
+  const navigate = useNavigate();
+
   if (isLoading)
     return (
       <TextView>
         <Spinner />
       </TextView>
     );
-  if (isError) return <TextView>에러가 발생했습니다.</TextView>;
-  if (!data) return <TextView>해당 상품에 대한 정보가 없습니다.</TextView>;
+
+  if (!data) {
+    alert('해당 상품에 대한 정보가 없습니다.');
+    navigate(RouterPath.home);
+    return null;
+  }
 
   return (
     <Wrapper>
