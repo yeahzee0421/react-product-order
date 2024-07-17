@@ -15,7 +15,7 @@ npm run start
 - React의 form, ref, state만 사용하여 구현한다.
 - UI 구현
   - [x] 상품 상세 페이지 UI
-  - [ ] 결제 페이지 UI
+  - [x] 결제 페이지 UI
 - API 구현
   - [ ] `/api/v1/products/{productId}/detail`
   - [ ] `/api/v1/products/{productId}/options`

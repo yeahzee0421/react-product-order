@@ -1,15 +1,23 @@
 import styled from '@emotion/styled';
+import { useParams } from 'react-router-dom';
 
+import { useProductDetails } from '@/api/hooks/useGetProductDetails';
 import { Container } from '@/components/common/layouts/Container';
 import { ProductAsideSection } from '@/components/features/Product/ProductAsideSection';
 import { ProductMainSection } from '@/components/features/Product/ProductMainSection';
 
 export const ProductDetailPage = () => {
+  const { productId = '' } = useParams<{ productId: string }>();
+  const { data, isLoading, isError } = useProductDetails(productId);
+
+  if (isLoading || isError) return null;
+  if (!data) return null;
+
   return (
     <Wrapper>
       <Container maxWidth="1280px" justifyContent="flex-start" alignItems="flex-start">
         <InnerContainer>
-          <ProductMainSection />
+          <ProductMainSection product={data} />
           <ProductAsideSection />
         </InnerContainer>
       </Container>

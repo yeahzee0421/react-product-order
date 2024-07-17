@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 
 import { useGetThemesProducts } from '@/api/hooks/useGetThemesProducts';
 import { DefaultGoodsItems } from '@/components/common/GoodsItem/Default';
@@ -13,6 +14,7 @@ type Props = {
 };
 
 export const ThemeGoodsSection = ({ themeKey }: Props) => {
+  const navigate = useNavigate();
   const { data, isError, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
     useGetThemesProducts({
       themeKey,
@@ -29,6 +31,10 @@ export const ThemeGoodsSection = ({ themeKey }: Props) => {
   if (data.pages[0].products.length <= 0) return <TextView>상품이 없어요.</TextView>;
 
   const flattenGoodsList = data.pages.map((page) => page?.products ?? []).flat();
+
+  const moveToProductDetail = (productId: number) => {
+    navigate(`/products/${productId}`);
+  };
 
   return (
     <Wrapper>
@@ -47,6 +53,7 @@ export const ThemeGoodsSection = ({ themeKey }: Props) => {
               title={name}
               amount={price.sellingPrice}
               subtitle={brandInfo.name}
+              onClick={() => moveToProductDetail(id)}
             />
           ))}
         </Grid>
