@@ -9,6 +9,7 @@ import { OrderMainSection } from '@/components/features/Order/OrderMainSection';
 export const OrderPage = () => {
   const location = useLocation();
   const productData = location.state.product;
+
   return (
     <form action="true">
       <FormWrapper>
@@ -17,7 +18,9 @@ export const OrderPage = () => {
             <RetryErrorBoundary>
               <OrderMainSection product={productData.product} />
             </RetryErrorBoundary>
-            <OrderAsideSection />
+            <RetryErrorBoundary>
+              <OrderAsideSection />
+            </RetryErrorBoundary>
           </InnerContainer>
         </Container>
       </FormWrapper>
