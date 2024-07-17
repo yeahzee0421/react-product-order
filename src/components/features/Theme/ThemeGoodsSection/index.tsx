@@ -15,10 +15,9 @@ type Props = {
 
 export const ThemeGoodsSection = ({ themeKey }: Props) => {
   const navigate = useNavigate();
-  const { data, isError, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
-    useGetThemesProducts({
-      themeKey,
-    });
+  const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } = useGetThemesProducts({
+    themeKey,
+  });
 
   if (isLoading)
     return (
@@ -26,7 +25,7 @@ export const ThemeGoodsSection = ({ themeKey }: Props) => {
         <Spinner />
       </TextView>
     );
-  if (isError) return <TextView>에러가 발생했습니다.</TextView>;
+
   if (!data || data.pages[0].products.length <= 0) return <TextView>상품이 없어요.</TextView>;
 
   const flattenGoodsList = data.pages.map((page) => page?.products ?? []).flat();
