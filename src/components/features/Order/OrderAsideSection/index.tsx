@@ -11,6 +11,9 @@ type Props = {
 };
 
 export const OrderAsideSection = ({ totalCost }: Props) => {
+  const handleOrderSubmit = () => {
+    alert('주문이 완료되었습니다.');
+  };
   return (
     <Aside>
       <Wrapper>
@@ -19,7 +22,7 @@ export const OrderAsideSection = ({ totalCost }: Props) => {
         </h6>
         <Divider aria-orientation="horizontal" />
         <FormContainer>
-          <Checkbox iconColor="orange">현금영수증 신청</Checkbox>
+          <Checkbox colorScheme="orange">현금영수증 신청</Checkbox>
           <Gap />
           <Select name="cashReceiptType">
             <option value="PERSONAL">개인소득공제</option>
@@ -34,7 +37,9 @@ export const OrderAsideSection = ({ totalCost }: Props) => {
           <span className="totalCost">{totalCost}원</span>
         </TotalCost>
         <div style={{ height: '32' }} />
-        <Button theme="kakao">{totalCost}원 결제하기</Button>
+        <Button theme="kakao" onClick={handleOrderSubmit}>
+          {totalCost}원 결제하기
+        </Button>
       </Wrapper>
     </Aside>
   );
