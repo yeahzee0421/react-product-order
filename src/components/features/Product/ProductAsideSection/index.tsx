@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import type { ProductsDetailResponseData } from '@/api/hooks/useGetProductDetails';
 import { Aside } from '@/components/common/layouts/Split';
+import { useAuth } from '@/provider/Auth';
 
 import {
   AsideContainer,
@@ -21,9 +22,19 @@ type Props = {
 export const ProductAsideSection = ({ product }: Props) => {
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
+  const auth = useAuth();
 
   const moveToOrderPage = () => {
-    navigate('/order', { state: { product: { product, quantity } } });
+    if (auth) {
+      navigate('/order', { state: { product: { product, quantity } } });
+    } else {
+      const confirmed = window.confirm(
+        '로그인이 필요한 메뉴입니다. 로그인 페이지로 이동하시겠습니까?',
+      );
+      if (confirmed) {
+        navigate('/login');
+      }
+    }
   };
 
   const increaseQuantity = () => {

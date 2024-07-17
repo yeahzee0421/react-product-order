@@ -20,4 +20,4 @@ npm run start
   - [x] `/api/v1/products/{productId}/detail`
   - [x] `/api/v1/products/{productId}/options`
   - [x] 없는 상품의 경우 메인 페이지로 연결
-- [ ] 나에게 선물하기 버튼 클릭 시 로그인이 되어있지 않다면 로그인 페이지로 이동하도록 함.
+- [x] 나에게 선물하기 버튼 클릭 시 로그인이 되어있지 않다면 로그인 페이지로 이동하도록 함.
