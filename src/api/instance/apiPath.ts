@@ -1,6 +1,6 @@
 export const API_ENDPOINT = {
-  THEMES: '/api/v1/themes',
-  RANKING: '/api/v1/ranking/products',
-  THEME_PRODUCTS: (themeKey: string) => `/api/v1/themes/${themeKey}/products`,
-  PRODUCT_DETAILS: (productId: string) => `/api/v1/products/${productId}/detail`,
+  THEMES: '/v1/themes',
+  RANKING: '/v1/ranking/products',
+  THEME_PRODUCTS: (themeKey: string) => `/v1/themes/${themeKey}/products`,
+  PRODUCT_DETAILS: (productId: string) => `/v1/products/${productId}/detail`,
 };

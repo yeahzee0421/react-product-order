@@ -18,7 +18,7 @@ export const ProductDetailPage = () => {
       <Container maxWidth="1280px" justifyContent="flex-start" alignItems="flex-start">
         <InnerContainer>
           <ProductMainSection product={data} />
-          <ProductAsideSection />
+          <ProductAsideSection product={data} />
         </InnerContainer>
       </Container>
     </Wrapper>

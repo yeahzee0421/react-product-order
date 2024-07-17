@@ -1,5 +1,6 @@
 import { Button, Icon, Input } from '@chakra-ui/react';
 
+import type { ProductsDetailResponseData } from '@/api/hooks/useGetProductDetails';
 import { Aside } from '@/components/common/layouts/Split';
 
 import {
@@ -11,17 +12,16 @@ import {
   ProductCost,
 } from './component';
 
-export const ProductAsideSection = () => {
-  const product = {
-    title: '[단독각인] 피렌체 1221 에디션 오드코롱 50ml (13종 택1)',
-    totalCost: '145000원',
-  };
+type Props = {
+  product: ProductsDetailResponseData;
+};
 
+export const ProductAsideSection = ({ product }: Props) => {
   return (
     <Aside>
       <AsideContainer>
         <OptionContainer>
-          <p className="product-title">{product.title}</p>
+          <p className="product-title">{product.detail.name}</p>
           <OptionBox>
             <Button
               type="button"
@@ -68,7 +68,7 @@ export const ProductAsideSection = () => {
         <Modals>
           <ProductCost>
             총 결제 금액
-            <span>{product.totalCost}</span>
+            <span>{product.detail.price.sellingPrice}</span>
           </ProductCost>
           <GiftButton>나에게 선물하기</GiftButton>
         </Modals>
