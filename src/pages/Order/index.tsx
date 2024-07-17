@@ -1,16 +1,22 @@
 import styled from '@emotion/styled';
+import { useLocation } from 'react-router-dom';
 
 import { Container } from '@/components/common/layouts/Container';
+import RetryErrorBoundary from '@/components/common/RetryErrorBoundary';
 import { OrderAsideSection } from '@/components/features/Order/OrderAsideSection';
 import { OrderMainSection } from '@/components/features/Order/OrderMainSection';
 
 export const OrderPage = () => {
+  const location = useLocation();
+  const productData = location.state.product;
   return (
     <form action="true">
       <FormWrapper>
         <Container maxWidth="1280px" justifyContent="flex-start" alignItems="flex-start">
           <InnerContainer>
-            <OrderMainSection />
+            <RetryErrorBoundary>
+              <OrderMainSection product={productData.product} />
+            </RetryErrorBoundary>
             <OrderAsideSection />
           </InnerContainer>
         </Container>

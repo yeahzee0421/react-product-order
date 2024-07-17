@@ -5,29 +5,6 @@ export const Container = styled.div`
   height: calc(-54px + 100vh);
 `;
 
-export const MessageSection = styled.section`
-  width: 100%;
-  padding: 44px 0px 32px;
-`;
-
-export const Header = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  span {
-    font-size: 18px;
-    line-height: 21px;
-    color: rgb(34, 34, 34);
-    box-sizing: border-box;
-    font-weight: 700;
-  }
-`;
-
-export const MessageForm = styled.div`
-  width: 100%;
-  padding: 12px 30px 16px;
-`;
-
 export const DetailSection = styled.section`
   width: 100%;
   padding: 16px;

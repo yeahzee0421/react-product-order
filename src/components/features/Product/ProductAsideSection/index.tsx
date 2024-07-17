@@ -1,4 +1,5 @@
 import { Button, Icon, Input } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 import type { ProductsDetailResponseData } from '@/api/hooks/useGetProductDetails';
 import { Aside } from '@/components/common/layouts/Split';
@@ -17,6 +18,12 @@ type Props = {
 };
 
 export const ProductAsideSection = ({ product }: Props) => {
+  const navigate = useNavigate();
+
+  const moveToOrderPage = () => {
+    navigate('/order', { state: { product: { product } } });
+  };
+
   return (
     <Aside>
       <AsideContainer>
@@ -70,7 +77,7 @@ export const ProductAsideSection = ({ product }: Props) => {
             총 결제 금액
             <span>{product.detail.price.sellingPrice}</span>
           </ProductCost>
-          <GiftButton>나에게 선물하기</GiftButton>
+          <GiftButton onClick={moveToOrderPage}>나에게 선물하기</GiftButton>
         </Modals>
       </AsideContainer>
     </Aside>
