@@ -6,7 +6,11 @@ import { Aside } from '@/components/common/layouts/Split';
 import { Gap } from '../OrderMainSection/component';
 import { FormContainer, TotalCost, Wrapper } from './component';
 
-export const OrderAsideSection = () => {
+type Props = {
+  totalCost: number;
+};
+
+export const OrderAsideSection = ({ totalCost }: Props) => {
   return (
     <Aside>
       <Wrapper>
@@ -27,10 +31,10 @@ export const OrderAsideSection = () => {
         <Divider aria-orientation="horizontal" />
         <TotalCost>
           <span className="totalCost-text">최종 결제금액</span>
-          <span className="totalCost">145000원</span>
+          <span className="totalCost">{totalCost}원</span>
         </TotalCost>
         <div style={{ height: '32' }} />
-        <Button theme="kakao">145000원 결제하기</Button>
+        <Button theme="kakao">{totalCost}원 결제하기</Button>
       </Wrapper>
     </Aside>
   );

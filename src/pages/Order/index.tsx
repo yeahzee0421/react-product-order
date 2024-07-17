@@ -9,6 +9,12 @@ import { OrderMainSection } from '@/components/features/Order/OrderMainSection';
 export const OrderPage = () => {
   const location = useLocation();
   const productData = location.state.product;
+  const quantity = productData.quantity;
+
+  const getTotalCost = () => {
+    const sellingPrice = productData.product.detail.price.sellingPrice;
+    return sellingPrice * quantity;
+  };
 
   return (
     <form action="true">
@@ -19,7 +25,7 @@ export const OrderPage = () => {
               <OrderMainSection product={productData.product} />
             </RetryErrorBoundary>
             <RetryErrorBoundary>
-              <OrderAsideSection />
+              <OrderAsideSection totalCost={getTotalCost()} />
             </RetryErrorBoundary>
           </InnerContainer>
         </Container>

@@ -1,4 +1,5 @@
 import { Button, Icon, Input } from '@chakra-ui/react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import type { ProductsDetailResponseData } from '@/api/hooks/useGetProductDetails';
@@ -19,9 +20,25 @@ type Props = {
 
 export const ProductAsideSection = ({ product }: Props) => {
   const navigate = useNavigate();
+  const [quantity, setQuantity] = useState(1);
 
   const moveToOrderPage = () => {
-    navigate('/order', { state: { product: { product } } });
+    navigate('/order', { state: { product: { product, quantity } } });
+  };
+
+  const increaseQuantity = () => {
+    setQuantity((prev) => Math.min(prev + 1, 100));
+  };
+
+  const decreaseQuantity = () => {
+    setQuantity((prev) => Math.max(prev - 1, 1));
+  };
+
+  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value, 10);
+    if (!isNaN(value) && value > 0) {
+      setQuantity(value);
+    }
   };
 
   return (
@@ -34,8 +51,7 @@ export const ProductAsideSection = ({ product }: Props) => {
               type="button"
               aria-label="수량 1개 감소"
               role="button"
-              tabIndex={-1}
-              aria-disabled="true"
+              onClick={decreaseQuantity}
             >
               <Icon viewBox="0 0 24 24" focusable="false" aria-hidden="true">
                 <g fill="currentColor">
@@ -50,18 +66,18 @@ export const ProductAsideSection = ({ product }: Props) => {
               role="spinbutton"
               aria-valuemin={1}
               aria-valuemax={100}
-              aria-valuenow={1}
-              aria-valuetext="1"
+              aria-valuenow={quantity}
+              aria-valuetext={String(quantity)}
               autoComplete="off"
               autoCorrect="off"
-              value={1}
+              value={quantity}
+              onChange={handleQuantityChange}
             />
             <Button
               type="button"
               aria-label="수량 1개 추가"
               role="button"
-              tabIndex={-1}
-              aria-disabled="true"
+              onClick={increaseQuantity}
             >
               <Icon viewBox="0 0 24 24" focusable="false" aria-hidden="true">
                 <path
@@ -75,7 +91,7 @@ export const ProductAsideSection = ({ product }: Props) => {
         <Modals>
           <ProductCost>
             총 결제 금액
-            <span>{product.detail.price.sellingPrice}</span>
+            <span>{product.detail.price.sellingPrice * quantity}</span>
           </ProductCost>
           <GiftButton onClick={moveToOrderPage}>나에게 선물하기</GiftButton>
         </Modals>
