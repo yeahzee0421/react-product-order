@@ -2,16 +2,30 @@ import { Checkbox, Divider, Input, Select } from '@chakra-ui/react';
 
 import { Button } from '@/components/common/Button';
 import { Aside } from '@/components/common/layouts/Split';
+import { orderHistorySessionStorage } from '@/utils/storage';
 
 import { Gap } from '../OrderMainSection/component';
 import { FormContainer, TotalCost, Wrapper } from './component';
 
 type Props = {
+  productId: number;
   totalCost: number;
 };
 
-export const OrderAsideSection = ({ totalCost }: Props) => {
+export const OrderAsideSection = ({ productId, totalCost }: Props) => {
   const handleOrderSubmit = () => {
+    const orderHistorys = orderHistorySessionStorage.get() || [];
+
+    const existingOrder = orderHistorys.find((order) => order.id === productId);
+
+    if (existingOrder) {
+      existingOrder.count += 1;
+    } else {
+      orderHistorys.push({ id: productId, count: 1 });
+    }
+
+    orderHistorySessionStorage.set(orderHistorys);
+
     alert('주문이 완료되었습니다.');
   };
   return (

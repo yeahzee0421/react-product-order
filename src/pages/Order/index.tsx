@@ -25,7 +25,10 @@ export const OrderPage = () => {
               <OrderMainSection product={productData.product} />
             </RetryErrorBoundary>
             <RetryErrorBoundary>
-              <OrderAsideSection totalCost={getTotalCost()} />
+              <OrderAsideSection
+                productId={productData.product.detail.id}
+                totalCost={getTotalCost()}
+              />
             </RetryErrorBoundary>
           </InnerContainer>
         </Container>
