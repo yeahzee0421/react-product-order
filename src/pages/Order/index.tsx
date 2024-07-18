@@ -1,14 +1,26 @@
 import styled from '@emotion/styled';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { Container } from '@/components/common/layouts/Container';
-import RetryErrorBoundary from '@/components/common/RetryErrorBoundary';
+import { Main } from '@/components/common/layouts/Split';
+import {
+  MessageFormSection,
+  validateMessageForm,
+} from '@/components/features/Order/Form/MessageFormSection';
 import { OrderAsideSection } from '@/components/features/Order/OrderAsideSection';
 import { OrderMainSection } from '@/components/features/Order/OrderMainSection';
+import { storageOrderHistory } from '@/components/features/Order/util/storage';
+
+type FormData = {
+  message: string;
+  receiptNumber: string;
+};
 
 export const OrderPage = () => {
   const location = useLocation();
   const productData = location.state.product;
+  const productId = location.state.product.id;
   const quantity = productData.quantity;
 
   const getTotalCost = () => {
@@ -16,20 +28,34 @@ export const OrderPage = () => {
     return sellingPrice * quantity;
   };
 
+  const [formData, setFormData] = useState<FormData>({ message: '', receiptNumber: '' });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const messageError = validateMessageForm(formData.message);
+
+    if (messageError) {
+      alert(`${messageError}`);
+      return;
+    }
+    storageOrderHistory(productId);
+    alert('주문이 완료되었습니다.');
+  };
+
   return (
-    <form action="true">
+    <form onSubmit={handleSubmit}>
       <FormWrapper>
         <Container maxWidth="1280px" justifyContent="flex-start" alignItems="flex-start">
           <InnerContainer>
-            <RetryErrorBoundary>
-              <OrderMainSection product={productData.product} />
-            </RetryErrorBoundary>
-            <RetryErrorBoundary>
-              <OrderAsideSection
-                productId={productData.product.detail.id}
-                totalCost={getTotalCost()}
-              />
-            </RetryErrorBoundary>
+            <Main>
+              <Container>
+                <MessageFormSection
+                  onMessageChange={(message) => setFormData({ ...formData, message })}
+                />
+                <OrderMainSection product={productData.product} />
+              </Container>
+            </Main>
+            <OrderAsideSection totalCost={getTotalCost()} />
           </InnerContainer>
         </Container>
       </FormWrapper>
