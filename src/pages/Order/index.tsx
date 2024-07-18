@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { Container } from '@/components/common/layouts/Container';
-import { Main } from '@/components/common/layouts/Split';
+import { Aside, AsideContainer, Main, MainContainer } from '@/components/common/layouts/Split';
 import {
   MessageFormSection,
   validateMessageForm,
@@ -11,6 +11,8 @@ import {
 import { OrderAsideSection } from '@/components/features/Order/OrderAsideSection';
 import { OrderMainSection } from '@/components/features/Order/OrderMainSection';
 import { storageOrderHistory } from '@/components/features/Order/util/storage';
+import { CashReceiptForm } from '@/components/features/Order/Form/CashReceiptForm';
+import { Divider } from '@chakra-ui/react';
 
 type FormData = {
   message: string;
@@ -48,14 +50,23 @@ export const OrderPage = () => {
         <Container maxWidth="1280px" justifyContent="flex-start" alignItems="flex-start">
           <InnerContainer>
             <Main>
-              <Container>
+              <MainContainer>
                 <MessageFormSection
                   onMessageChange={(message) => setFormData({ ...formData, message })}
                 />
                 <OrderMainSection product={productData.product} />
-              </Container>
+              </MainContainer>
             </Main>
-            <OrderAsideSection totalCost={getTotalCost()} />
+            <Aside>
+              <AsideContainer>
+                <h6 className="order-aside-title">
+                  <span className="span-title">결제 정보</span>
+                </h6>
+                <Divider aria-orientation="horizontal" />
+                <CashReceiptForm />
+                <OrderAsideSection totalCost={getTotalCost()} />
+              </AsideContainer>
+            </Aside>
           </InnerContainer>
         </Container>
       </FormWrapper>

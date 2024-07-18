@@ -1,10 +1,5 @@
 import styled from '@emotion/styled';
 
-export const Container = styled.div`
-  border-left: 1px solid rgb(229, 229, 229);
-  height: calc(-54px + 100vh);
-`;
-
 export const DetailSection = styled.section`
   width: 100%;
   padding: 16px;
