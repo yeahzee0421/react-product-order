@@ -21,15 +21,12 @@ export const OrderPage = () => {
       <FormWrapper>
         <Container maxWidth="1280px" justifyContent="flex-start" alignItems="flex-start">
           <InnerContainer>
-            <RetryErrorBoundary>
-              <OrderMainSection product={productData.product} />
-            </RetryErrorBoundary>
-            <RetryErrorBoundary>
-              <OrderAsideSection
-                productId={productData.product.detail.id}
-                totalCost={getTotalCost()}
-              />
-            </RetryErrorBoundary>
+            <OrderMainSection product={productData.product} />
+
+            <OrderAsideSection
+              productId={productData.product.detail.id}
+              totalCost={getTotalCost()}
+            />
           </InnerContainer>
         </Container>
       </FormWrapper>
