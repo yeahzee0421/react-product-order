@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { Container } from '@/components/common/layouts/Container';
-import { Aside, AsideContainer, Main, MainContainer } from '@/components/common/layouts/Split';
+import { SplitContainer } from '@/components/common/layouts/Split';
 import {
   CashReceiptForm,
   validateReceiptForm,
@@ -62,30 +62,26 @@ export const OrderPage = () => {
     <form onSubmit={handleSubmit}>
       <FormWrapper>
         <Container maxWidth="1280px" justifyContent="flex-start" alignItems="flex-start">
-          <InnerContainer>
-            <Main>
-              <MainContainer>
-                <MessageFormSection
-                  onMessageChange={(message) => setFormData({ ...formData, message })}
-                />
-                <OrderMainSection product={productData.product} />
-              </MainContainer>
-            </Main>
-            <Aside>
-              <AsideContainer>
-                <h6 className="order-aside-title">
-                  <span className="span-title">결제 정보</span>
-                </h6>
-                <Divider aria-orientation="horizontal" />
-                <CashReceiptForm
-                  onReceiptDataChange={(cashReceiptData) =>
-                    setFormData({ ...formData, cashReceiptData })
-                  }
-                />
-                <OrderAsideSection totalCost={getTotalCost()} />
-              </AsideContainer>
-            </Aside>
-          </InnerContainer>
+          <SplitContainer>
+            <div>
+              <MessageFormSection
+                onMessageChange={(message) => setFormData({ ...formData, message })}
+              />
+              <OrderMainSection product={productData.product} />
+            </div>
+            <div>
+              <h6 className="order-aside-title">
+                <span className="span-title">결제 정보</span>
+              </h6>
+              <Divider aria-orientation="horizontal" />
+              <CashReceiptForm
+                onReceiptDataChange={(cashReceiptData) =>
+                  setFormData({ ...formData, cashReceiptData })
+                }
+              />
+              <OrderAsideSection totalCost={getTotalCost()} />
+            </div>
+          </SplitContainer>
         </Container>
       </FormWrapper>
     </form>
@@ -94,12 +90,4 @@ export const OrderPage = () => {
 
 const FormWrapper = styled.div`
   width: 100%;
-`;
-
-const InnerContainer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  position: relative;
 `;

@@ -1,6 +1,24 @@
 import styled from '@emotion/styled';
+import type { ReactNode } from 'react';
 
 import { breakpoints } from '@/styles/variants';
+
+type SplitContainerProps = {
+  children: [ReactNode, ReactNode];
+};
+
+export const SplitContainer = ({ children }: SplitContainerProps) => {
+  return (
+    <Wrapper>
+      <Main>
+        <MainContainer>{children[0]}</MainContainer>
+      </Main>
+      <Aside>
+        <AsideContainer>{children[1]}</AsideContainer>
+      </Aside>
+    </Wrapper>
+  );
+};
 
 export const Main = styled.main`
   width: 100%;
@@ -40,4 +58,12 @@ export const AsideContainer = styled.div`
     box-sizing: border-box;
     font-weight: 700;
   }
+`;
+
+const Wrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: relative;
 `;
