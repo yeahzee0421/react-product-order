@@ -70,20 +70,7 @@ export const ProductAsideSection = ({ product }: Props) => {
                 </g>
               </Icon>
             </Button>
-            <Input
-              inputMode="decimal"
-              type="text"
-              pattern="[0-9]*(.[0-9]+)?"
-              role="spinbutton"
-              aria-valuemin={1}
-              aria-valuemax={100}
-              aria-valuenow={quantity}
-              aria-valuetext={String(quantity)}
-              autoComplete="off"
-              autoCorrect="off"
-              value={quantity}
-              onChange={handleQuantityChange}
-            />
+            <Input value={quantity} onChange={handleQuantityChange} />
             <Button
               type="button"
               aria-label="수량 1개 추가"
