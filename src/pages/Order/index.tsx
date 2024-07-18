@@ -17,7 +17,7 @@ export const OrderPage = () => {
   };
 
   return (
-    <form action="true">
+    <form>
       <FormWrapper>
         <Container maxWidth="1280px" justifyContent="flex-start" alignItems="flex-start">
           <InnerContainer>
