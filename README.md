@@ -27,7 +27,7 @@ npm run start
 #### 📜Requirements
 
 - 상품 상세 페이지
-  - [ ] 상품의 개수를 option API의 giftOrderLimit을 초과한 경우 선택이 불가하도록 함.
+  - [x] 상품의 개수를 option API의 giftOrderLimit을 초과한 경우 선택이 불가하도록 함.
 - 결제 페이지 Form validation
   - [ ] 카드 메시지를 입력하지 않으면 메시지를 입력하도록 안내
   - [ ] 카드 메시지가 100글자가 넘어가면 100자 이내로 입력하도록 안내
