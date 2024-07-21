@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import type { ProductOptionData } from '@/types';
 
 import { fetchInstance } from '../instance';
-import { API_ENDPOINT } from '../instance/apiPath';
+import { dynamicPath } from '../instance/apiPath';
 
 export type ProductOptionsResponseData = {
   productId: number;
@@ -17,7 +17,7 @@ export type ProductOptionsResponseData = {
 };
 
 export const getProductOptions = async (productId: number) => {
-  const response = await fetchInstance.get(API_ENDPOINT.PRODUCT_OPTIONS(productId));
+  const response = await fetchInstance.get(dynamicPath.PRODUCT_OPTIONS(productId));
   return response.data;
 };
 

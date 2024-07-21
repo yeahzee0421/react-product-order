@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import type { GoodsData } from '@/types';
 
 import { fetchInstance } from '../instance';
-import { API_ENDPOINT } from '../instance/apiPath';
+import { dynamicPath } from '../instance/apiPath';
 
 export type ProductDetailsData = {
   detail: GoodsData;
@@ -15,7 +15,7 @@ export const queryKeys = {
 };
 
 export const getProductDetails = async (productId: number): Promise<ProductDetailsData> => {
-  const response = await fetchInstance.get(API_ENDPOINT.PRODUCT_DETAILS(productId));
+  const response = await fetchInstance.get(dynamicPath.PRODUCT_DETAILS(productId));
   return response.data;
 };
 

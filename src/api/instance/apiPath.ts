@@ -1,7 +1,11 @@
-export const API_ENDPOINT = {
+export const apiPath = {
   THEMES: '/v1/themes',
   RANKING: '/v1/ranking/products',
-  THEME_PRODUCTS: (themeKey: string) => `/v1/themes/${themeKey}/products`,
-  PRODUCT_DETAILS: (productId: number) => `/v1/products/${productId}/detail`,
-  PRODUCT_OPTIONS: (productId: number) => `/v1/products/${productId}/options`,
+  PRODUCT: '/v1/products',
+};
+
+export const dynamicPath = {
+  THEME_PRODUCTS: (themeKey: string) => `${apiPath.THEMES}/${themeKey}/products`,
+  PRODUCT_DETAILS: (productId: number) => `${apiPath.PRODUCT}/${productId}/detail`,
+  PRODUCT_OPTIONS: (productId: number) => `${apiPath.PRODUCT}/${productId}/options`,
 };
