@@ -64,11 +64,13 @@ export const CashReceiptForm = ({ onReceiptDataChange }: CashReceiptFormProps) =
 };
 
 export const validateReceiptForm = (data: CashReceiptData) => {
+  const receiptNumber = data.receiptNumber;
+
   let receiptError = '';
-  if (data.isReceiptChecked && data.receiptNumber.trim().length === 0) {
+  if (data.isReceiptChecked && receiptNumber.trim().length === 0) {
     receiptError = '현금영수증 번호를 입력해주세요';
   }
-  if (!/^\d*$/.test(data.receiptNumber)) {
+  if (isNaN(Number(receiptNumber))) {
     receiptError = '현금영수증 번호는 숫자로만 입력해주세요.';
   }
   return receiptError;

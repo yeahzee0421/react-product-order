@@ -18,8 +18,6 @@ export const ProductDetailPage = () => {
   });
   const navigate = useNavigate();
 
-  console.log(data);
-
   if (isLoading)
     return (
       <TextView>

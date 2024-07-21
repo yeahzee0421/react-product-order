@@ -28,8 +28,10 @@ type FormData = {
 export const OrderPage = () => {
   const location = useLocation();
   const productData = location.state.product;
-  const productId = location.state.product.id;
+  const productId = productData.detail.id;
   const quantity = productData.quantity;
+
+  console.log(productData);
 
   const [formData, setFormData] = useState<FormData>({
     message: '',
@@ -54,7 +56,7 @@ export const OrderPage = () => {
   };
 
   const getTotalCost = () => {
-    const sellingPrice = productData.product.detail.price.sellingPrice;
+    const sellingPrice = productData.detail.price.sellingPrice;
     return sellingPrice * quantity;
   };
 
@@ -67,7 +69,7 @@ export const OrderPage = () => {
               <MessageFormSection
                 onMessageChange={(message) => setFormData({ ...formData, message })}
               />
-              <OrderMainSection product={productData.product} />
+              <OrderMainSection product={productData.detail} />
             </div>
             <div>
               <h6 className="order-aside-title">
