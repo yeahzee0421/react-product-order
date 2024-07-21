@@ -1,6 +1,6 @@
 import { Textarea } from '@chakra-ui/react';
 import styled from '@emotion/styled';
-import type { ChangeEvent} from 'react';
+import type { ChangeEvent } from 'react';
 import { useState } from 'react';
 
 type MessageFormProps = {
@@ -34,10 +34,12 @@ export const MessageFormSection = ({ onMessageChange }: MessageFormProps) => {
 };
 
 export const validateMessageForm = (message: string) => {
-  let messageError = '';
-  if (message.trim().length === 0) messageError = '메세지를 입력해주세요.';
-  if (message.trim().length > 100) messageError = '메세지는 100자 이내로 입력해주세요.';
-  return messageError;
+  if (message.trim().length === 0) {
+    return '메세지를 입력해주세요.';
+  }
+  if (message.trim().length > 100) {
+    return '메세지는 100자 이내로 입력해주세요.';
+  }
 };
 
 const Wrapper = styled.section`

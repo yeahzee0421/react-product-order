@@ -31,8 +31,6 @@ export const OrderPage = () => {
   const productId = productData.detail.id;
   const quantity = productData.quantity;
 
-  console.log(productData);
-
   const [formData, setFormData] = useState<FormData>({
     message: '',
     cashReceiptData: { isReceiptChecked: false, receiptNumber: '' },
@@ -81,6 +79,7 @@ export const OrderPage = () => {
                   setFormData({ ...formData, cashReceiptData })
                 }
               />
+              <Divider aria-orientation="horizontal" />
               <OrderAsideSection totalCost={getTotalCost()} />
             </div>
           </SplitContainer>
