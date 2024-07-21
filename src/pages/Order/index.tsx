@@ -8,7 +8,7 @@ import { SplitContainer } from '@/components/common/layouts/Split';
 import {
   CashReceiptForm,
   validateReceiptForm,
-} from '@/components/features/Order/Form/CashReceiptForm';
+} from '@/components/features/Order/Form/CashReceiptFormSection';
 import {
   MessageFormSection,
   validateMessageForm,
