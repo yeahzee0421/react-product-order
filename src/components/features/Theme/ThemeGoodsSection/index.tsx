@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 
 import { useGetThemesProducts } from '@/api/hooks/useGetThemesProducts';
 import { DefaultGoodsItems } from '@/components/common/GoodsItem/Default';
@@ -13,10 +14,10 @@ type Props = {
 };
 
 export const ThemeGoodsSection = ({ themeKey }: Props) => {
-  const { data, isError, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
-    useGetThemesProducts({
-      themeKey,
-    });
+  const navigate = useNavigate();
+  const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } = useGetThemesProducts({
+    themeKey,
+  });
 
   if (isLoading)
     return (
@@ -24,11 +25,14 @@ export const ThemeGoodsSection = ({ themeKey }: Props) => {
         <Spinner />
       </TextView>
     );
-  if (isError) return <TextView>에러가 발생했습니다.</TextView>;
-  if (!data) return <></>;
-  if (data.pages[0].products.length <= 0) return <TextView>상품이 없어요.</TextView>;
+
+  if (!data || data.pages[0].products.length <= 0) return <TextView>상품이 없어요.</TextView>;
 
   const flattenGoodsList = data.pages.map((page) => page?.products ?? []).flat();
+
+  const moveToProductDetail = (productId: number) => {
+    navigate(`/products/${productId}`);
+  };
 
   return (
     <Wrapper>
@@ -47,6 +51,7 @@ export const ThemeGoodsSection = ({ themeKey }: Props) => {
               title={name}
               amount={price.sellingPrice}
               subtitle={brandInfo.name}
+              onClick={() => moveToProductDetail(id)}
             />
           ))}
         </Grid>
