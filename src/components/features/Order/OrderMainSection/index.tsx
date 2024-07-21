@@ -1,10 +1,10 @@
-import type { ProductsDetailResponseData } from '@/api/hooks/useGetProductDetails';
 import { Image } from '@/components/common/Image';
+import type { GoodsData } from '@/types';
 
 import { Content, Contents, Detail, DetailSection, Gap } from './component';
 
 type Props = {
-  product: ProductsDetailResponseData;
+  product: GoodsData;
 };
 
 export const OrderMainSection = ({ product }: Props) => {
@@ -14,10 +14,10 @@ export const OrderMainSection = ({ product }: Props) => {
       <Gap />
       <Contents>
         <Content>
-          <Image width="86px" ratio="square" src={product.detail.imageURL} />
+          <Image width="86px" ratio="square" src={product.imageURL} />
           <Detail>
-            <p className="brand-name">{product.detail.brandInfo.name}</p>
-            <p className="product-name">{product.detail.name}</p>
+            <p className="brand-name">{product.brandInfo.name}</p>
+            <p className="product-name">{product.name}</p>
           </Detail>
         </Content>
       </Contents>

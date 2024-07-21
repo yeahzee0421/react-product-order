@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useProductDetails } from '@/api/hooks/useGetProductDetails';
+import { queryKeys, useProductDetailsQuery } from '@/api/hooks/useGetProductDetails';
 import { Container } from '@/components/common/layouts/Container';
 import RetryErrorBoundary from '@/components/common/RetryErrorBoundary';
 import { Spinner } from '@/components/common/Spinner';
@@ -10,9 +10,15 @@ import { ProductMainSection } from '@/components/features/Product/ProductMainSec
 import { RouterPath } from '@/routes/path';
 
 export const ProductDetailPage = () => {
-  const { productId = '' } = useParams<{ productId: string }>();
-  const { data, isLoading } = useProductDetails(productId);
+  const { productId: productIdString = '' } = useParams<{ productId: string }>();
+  const productId = Number(productIdString);
+  const { data, isLoading } = useProductDetailsQuery(productId, {
+    queryKey: queryKeys.detailsByProductId(productId),
+    staleTime: 6000,
+  });
   const navigate = useNavigate();
+
+  console.log(data);
 
   if (isLoading)
     return (
@@ -32,10 +38,10 @@ export const ProductDetailPage = () => {
       <Container maxWidth="1280px" justifyContent="flex-start" alignItems="flex-start">
         <InnerContainer>
           <RetryErrorBoundary>
-            <ProductMainSection product={data} />
+            <ProductMainSection detail={data.detail} />
           </RetryErrorBoundary>
           <RetryErrorBoundary>
-            <ProductAsideSection product={data} />
+            <ProductAsideSection detail={data.detail} />
           </RetryErrorBoundary>
         </InnerContainer>
       </Container>

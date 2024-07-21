@@ -16,13 +16,13 @@ export type ProductOptionsResponseData = {
   options: ProductOptionData[];
 };
 
-export const getProductOptions = async (productId: string) => {
+export const getProductOptions = async (productId: number) => {
   const response = await fetchInstance.get(API_ENDPOINT.PRODUCT_OPTIONS(productId));
   return response.data;
 };
 
 export const useProductOptions = (
-  productId: string,
+  productId: number,
 ): UseQueryResult<ProductOptionsResponseData> => {
   return useQuery<ProductOptionsResponseData>({
     queryKey: ['productOptions', productId],

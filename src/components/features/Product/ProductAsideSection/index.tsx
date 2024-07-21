@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import type { ProductsDetailResponseData } from '@/api/hooks/useGetProductDetails';
+import type { ProductDetailsData } from '@/api/hooks/useGetProductDetails';
 import { useProductOptions } from '@/api/hooks/useGetProductOptions';
 import { Aside } from '@/components/common/layouts/Split';
 import { Spinner } from '@/components/common/Spinner';
@@ -18,16 +18,12 @@ import {
   ProductCost,
 } from './component';
 
-type Props = {
-  product: ProductsDetailResponseData;
-};
-
-export const ProductAsideSection = ({ product }: Props) => {
+export const ProductAsideSection = ({ detail }: ProductDetailsData) => {
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
   const auth = useAuth();
-  const productId = product.detail.id;
-  const { data, isLoading } = useProductOptions(productId.toString());
+  const productId = detail.id;
+  const { data, isLoading } = useProductOptions(productId);
 
   if (isLoading)
     return (
@@ -42,7 +38,7 @@ export const ProductAsideSection = ({ product }: Props) => {
 
   const moveToOrderPage = () => {
     if (auth) {
-      navigate('/order', { state: { product: { product, quantity } } });
+      navigate('/order', { state: { product: { detail, quantity } } });
     } else {
       const confirmed = window.confirm(
         '로그인이 필요한 메뉴입니다. 로그인 페이지로 이동하시겠습니까?',
@@ -69,14 +65,14 @@ export const ProductAsideSection = ({ product }: Props) => {
   };
 
   const getTotalCost = () => {
-    return product.detail.price.sellingPrice * quantity;
+    return detail.price.sellingPrice * quantity;
   };
 
   return (
     <Aside>
       <AsideContainer>
         <OptionContainer>
-          <p className="product-title">{product.detail.name}</p>
+          <p className="product-title">{detail.name}</p>
           <OptionBox>
             <Button
               type="button"
